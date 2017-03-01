@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script src=/bower_components/ionic/js/ionic.bundle.js></script>
+	<script src=carousel.js></script>
+	<link rel=stylesheet href=carousel.css>
+	<style>
+		div[carousel] {
+			width: 300px;
+			height: 200px;
+			background-color: lightgray;
+		}
+	</style>
+</head>
+<body ng-app=.>
+	<div carousel>
+		<div>a</div>
+		<div>b</div>
+	</div>
+	<script>
+		angular.module('.', ['carousel']);
+	</script>
+</body>
+</html>

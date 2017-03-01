@@ -14,5 +14,8 @@
   "ignore": [
     "**/.*",
     "bower_components"
-  ]
+  ],
+  "dependencies": {
+    "ionic": "bower-ionic#1.*"
+  }
 }

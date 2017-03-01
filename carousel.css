@@ -1,0 +1,15 @@
+﻿*[carousel] {
+	overflow-x: hidden;
+}
+
+*[carousel] > div {
+	height: 100%;
+	display: flex;
+}
+
+*[carousel] > div > div {
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
