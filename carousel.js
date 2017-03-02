@@ -7,14 +7,16 @@
 				onDragEnd: '&'
 			},
 			compile: function (element, attr) {
-				var width = element.prop('offsetWidth');
-				var strip = element.children()
-					.wrap('<div ng-repeat="$item in ' + attr.ngModel + '" style=width:' + width + 'px;>')
-					.parent()
+				var children = element.children()
+					.wrap('<div ng-repeat="$item in ' + attr.ngModel + '">')
+					.parent();
+				var strip = children
 					.wrap("<div>")
 					.parent()
 					.css({ 'transition-property': 'transform' });
 				return function (scope, element) {
+					var width = element.prop('offsetWidth');
+					children.css('width', width + 'px');
 					var x = 0;
 					$ionicGesture.on('drag', function ($event) {
 						var x1 = x + $event.gesture.deltaX;
