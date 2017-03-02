@@ -13,13 +13,15 @@
 		}
 	</style>
 </head>
-<body ng-app=.>
-	<div carousel>
-		<div>a</div>
-		<div>b</div>
+<body ng-app=. ng-controller=.>
+	<div carousel ng-model=a>
+		<div>{{$item}}</div>
 	</div>
 	<script>
-		angular.module('.', ['carousel']);
+		angular.module('.', ['carousel'])
+			.controller('.', function ($scope) {
+				$scope.a = ['a', 'b'];
+			});
 	</script>
 </body>
 </html>
