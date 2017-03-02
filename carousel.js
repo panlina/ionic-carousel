@@ -17,8 +17,10 @@
 				return function (scope, element) {
 					var x = 0;
 					$ionicGesture.on('drag', function ($event) {
-						translate(x + $event.gesture.deltaX);
-						scope.onDrag({ x: x + $event.gesture.deltaX });
+						var x1 = x + $event.gesture.deltaX;
+						x1 = resist(x1);
+						translate(x1);
+						scope.onDrag({ x: x1 });
 					}, strip);
 					$ionicGesture.on('dragend', function ($event) {
 						x = width * nearest(x + $event.gesture.deltaX);
@@ -40,6 +42,18 @@
 						if (x < -(n - 1)) return -(n - 1);
 						var f = Math.floor(x);
 						return x < f + .5 ? f : (f + 1);
+					}
+					function resist(x) {
+						var n = scope.ngModel.length;
+						if (x > 0)
+							x = atan(x);
+						else if (x < -width * (n - 1))
+							x = -width * (n - 1) - atan(-width * (n - 1) - x);
+						return x;
+					}
+					function atan(x) {
+						var a = 120 / (Math.PI / 2);
+						return a * Math.atan(x / a);
 					}
 				};
 			}
