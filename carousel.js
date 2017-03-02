@@ -3,7 +3,8 @@
 		return {
 			scope: {
 				ngModel: '=',
-				onDrag: '&'
+				onDrag: '&',
+				onDragEnd: '&'
 			},
 			compile: function (element, attr) {
 				var width = element.prop('offsetWidth');
@@ -22,6 +23,7 @@
 					$ionicGesture.on('dragend', function ($event) {
 						x = width * nearest(x + $event.gesture.deltaX);
 						translate(x, .4);
+						scope.onDragEnd({ x: x });
 					}, strip);
 					scope.$watch('ngModel', function (value) {
 						if (!value) return;

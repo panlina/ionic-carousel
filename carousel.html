@@ -14,13 +14,21 @@
 	</style>
 </head>
 <body ng-app=. ng-controller=.>
-	<div carousel ng-model=a>
+	<div carousel ng-model=a on-drag="ondrag(x);" on-drag-end=ondragend(x);>
 		<div>{{$item}}</div>
 	</div>
+	<div>x:{{x}}</div>
 	<script>
 		angular.module('.', ['carousel'])
 			.controller('.', function ($scope) {
 				$scope.a = ['a', 'b'];
+				$scope.x = 0;
+				$scope.ondrag = function (x) {
+					$scope.x = x;
+				};
+				$scope.ondragend = function (x) {
+					$scope.x = x;
+				};
 			});
 	</script>
 </body>
