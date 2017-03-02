@@ -2,7 +2,8 @@
 	.directive('carousel', function ($ionicGesture) {
 		return {
 			scope: {
-				ngModel: '='
+				ngModel: '=',
+				onDrag: '&'
 			},
 			compile: function (element, attr) {
 				var width = element.prop('offsetWidth');
@@ -16,6 +17,7 @@
 					var x = 0;
 					$ionicGesture.on('drag', function ($event) {
 						translate(x + $event.gesture.deltaX);
+						scope.onDrag({ x: x + $event.gesture.deltaX });
 					}, strip);
 					$ionicGesture.on('dragend', function ($event) {
 						x = width * nearest(x + $event.gesture.deltaX);
