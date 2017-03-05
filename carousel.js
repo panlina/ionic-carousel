@@ -3,8 +3,8 @@
 		return {
 			scope: {
 				ngModel: '=',
-				onDrag: '&',
-				onDragEnd: '&'
+				carouselOnDrag: '&',
+				carouselOnDragEnd: '&'
 			},
 			compile: function (element, attr) {
 				var children = element.children()
@@ -22,12 +22,12 @@
 						var x1 = x + $event.gesture.deltaX;
 						x1 = resist(x1);
 						translate(x1);
-						scope.onDrag({ x: x1 });
+						scope.carouselOnDrag({ x: x1 });
 					}, strip);
 					$ionicGesture.on('dragend', function ($event) {
 						x = width * nearest(x + $event.gesture.deltaX);
 						translate(x, .4);
-						scope.onDragEnd({ x: x });
+						scope.carouselOnDragEnd({ x: x });
 					}, strip);
 					scope.$watch('ngModel', function (value) {
 						if (!value) return;

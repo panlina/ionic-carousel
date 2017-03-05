@@ -14,7 +14,7 @@
 	</style>
 </head>
 <body ng-app=. ng-controller=.>
-	<div carousel ng-model=a on-drag="ondrag(x);" on-drag-end=ondragend(x);>
+	<div carousel ng-model=a carousel:on-drag="ondrag(x);" carousel:on-drag-end=ondragend(x);>
 		<div>{{$item}}</div>
 	</div>
 	<div>x:{{x}}</div>
@@ -25,9 +25,11 @@
 				$scope.x = 0;
 				$scope.ondrag = function (x) {
 					$scope.x = x;
+					$scope.$apply();
 				};
 				$scope.ondragend = function (x) {
 					$scope.x = x;
+					$scope.$apply();
 				};
 			});
 	</script>
