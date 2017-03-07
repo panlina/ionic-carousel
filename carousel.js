@@ -15,6 +15,7 @@
 					.parent()
 					.css({ 'transition-property': 'transform' });
 				return function (scope, element) {
+					var strip = element.children();
 					var width = element.prop('offsetWidth');
 					children.css('width', width + 'px');
 					var x = 0;
