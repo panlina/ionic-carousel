@@ -14,10 +14,11 @@
 	</style>
 </head>
 <body ng-app=. ng-controller=.>
-	<div carousel ng-model=a carousel:on-drag="ondrag(x);" carousel:on-drag-end=ondragend(x);>
+	<div carousel ng-model=a carousel:on-drag="ondrag(x);" carousel:on-drag-end=ondragend(x); carousel:controller=c>
 		<div>{{$item}}</div>
 	</div>
 	<div>x:{{x}}</div>
+	<button ng-click=c.slide(1);>slide</button>
 	<script>
 		angular.module('.', ['carousel'])
 			.controller('.', function ($scope) {

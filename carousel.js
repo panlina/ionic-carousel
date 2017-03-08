@@ -4,7 +4,8 @@
 			scope: {
 				ngModel: '=',
 				carouselOnDrag: '&',
-				carouselOnDragEnd: '&'
+				carouselOnDragEnd: '&',
+				carouselController: '='
 			},
 			compile: function (element, attr) {
 				var children = element.children()
@@ -34,6 +35,12 @@
 						if (!value) return;
 						element.children().css('width', width * value.length + 'px');
 					});
+					scope.carouselController = {
+						slide: function (index) {
+							x = -width * index;
+							translate(x, .4);
+						}
+					};
 					function translate(x, duration) {
 						strip.css({ 'transition-duration': (duration || 0) + 's' });
 						strip.css({ transform: "translateX(" + x + "px)" });
