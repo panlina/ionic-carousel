@@ -13,11 +13,12 @@
 					.wrap('<div ng-repeat="$item in ' + attr.ngModel + '">')
 					.parent();
 				var strip = children
-					.wrap("<div>")
+					.wrap("<div class=carousel-strip>")
 					.parent()
 					.css({ 'transition-property': 'transform' });
+				element.append("<div class=carousel-progressbar><div ng-repeat=\"_ in " + attr.ngModel + "\" ng-class={active:" + attr.carouselIndex + "==$index}>{{carouselIndex}}</div></div>");
 				return function (scope, element) {
-					var strip = element.children();
+					var strip = angular.element(element[0].querySelector('.carousel-strip'));
 					var width = element.prop('offsetWidth');
 					children.css('width', width + 'px');
 					var x = 0;
@@ -32,6 +33,7 @@
 						var index = nearest(x + $event.gesture.deltaX);
 						x = width * index;
 						scope.carouselIndex = -index;
+						scope.$apply();
 						translate(x, .4);
 						scope.carouselOnDragEnd({ x: x });
 					}, strip);

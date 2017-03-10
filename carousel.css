@@ -1,15 +1,37 @@
 ﻿*[carousel] {
 	overflow-x: hidden;
+	position: relative;
 }
 
-*[carousel] > div {
+.carousel-strip {
 	height: 100%;
 	display: flex;
 }
 
-*[carousel] > div > div {
+.carousel-strip > div {
 	height: 100%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+}
+
+.carousel-progressbar {
+	position: absolute;
+	transform: translate(-50%,-50%);
+	-webkit-transform: translate(-50%,-50%);
+	left: 50%;
+	top: 90%;
+	display: flex;
+}
+
+.carousel-progressbar > * {
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	background-color: darkgray;
+	margin: 4px;
+}
+
+.carousel-progressbar > .active {
+	background-color: gray;
 }
