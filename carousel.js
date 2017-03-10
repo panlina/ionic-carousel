@@ -37,7 +37,7 @@
 					}, strip);
 					scope.$watch('ngModel', function (value) {
 						if (!value) return;
-						element.children().css('width', width * value.length + 'px');
+						strip.css('width', width * value.length + 'px');
 					});
 					scope.carouselController = {
 						slide: function (index) {
