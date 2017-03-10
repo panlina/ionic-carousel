@@ -43,7 +43,7 @@
 					};
 					function translate(x, duration) {
 						strip.css({ 'transition-duration': (duration || 0) + 's' });
-						strip.css({ transform: "translateX(" + x + "px)" });
+						strip.css({ transform: "translate3d(" + x + "px,0,0)" });
 					}
 					function nearest(x) {
 						var n = scope.ngModel.length;
