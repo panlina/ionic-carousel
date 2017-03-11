@@ -3,6 +3,7 @@
 		return {
 			scope: {
 				ngModel: '=',
+				carouselIndex: '=?',
 				carouselOnDrag: '&',
 				carouselOnDragEnd: '&',
 				carouselController: '='
@@ -15,6 +16,7 @@
 					var strip = element.children();
 					var width = element.prop('offsetWidth');
 					var x = 0;
+					scope.carouselIndex = 0;
 					$ionicGesture.on('drag', function ($event) {
 						var x1 = x + $event.gesture.deltaX;
 						x1 = resist(x1);
@@ -22,7 +24,9 @@
 						scope.carouselOnDrag({ x: x1 });
 					}, strip);
 					$ionicGesture.on('dragend', function ($event) {
-						x = width * nearest(x + $event.gesture.deltaX);
+						var index = nearest(x + $event.gesture.deltaX);
+						x = width * index;
+						scope.carouselIndex = -index;
 						translate(x, .4);
 						scope.carouselOnDragEnd({ x: x });
 					}, strip);
@@ -34,6 +38,7 @@
 					scope.carouselController = {
 						slide: function (index) {
 							x = -width * index;
+							scope.carouselIndex = index;
 							translate(x, .4);
 						}
 					};
