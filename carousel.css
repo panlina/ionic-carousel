@@ -2,12 +2,12 @@
 	overflow-x: hidden;
 }
 
-*[carousel] > div {
+.carousel-strip {
 	height: 100%;
 	display: flex;
 }
 
-*[carousel] > div > div {
+.carousel-strip > div {
 	height: 100%;
 	display: flex;
 	align-items: center;

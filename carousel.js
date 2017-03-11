@@ -9,11 +9,11 @@
 				carouselController: '='
 			},
 			template: function (element) {
-				return "<div style=transition-property:transform;><div ng-repeat=\"$item in ngModel\">" + element.html() + "</div></div>";
+				return "<div class=carousel-strip style=transition-property:transform;><div ng-repeat=\"$item in ngModel\">" + element.html() + "</div></div>";
 			},
 			compile: function (element, attr) {
 				return function (scope, element) {
-					var strip = element.children();
+					var strip = angular.element(element[0].querySelector(".carousel-strip"));
 					var width = element.prop('offsetWidth');
 					var x = 0;
 					scope.carouselIndex = 0;
