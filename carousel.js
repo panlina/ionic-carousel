@@ -7,18 +7,13 @@
 				carouselOnDragEnd: '&',
 				carouselController: '='
 			},
+			template: function (element) {
+				return "<div style=transition-property:transform;><div ng-repeat=\"$item in ngModel\">" + element.html() + "</div></div>";
+			},
 			compile: function (element, attr) {
-				var children = element.children()
-					.wrap('<div ng-repeat="$item in ' + attr.ngModel + '">')
-					.parent();
-				var strip = children
-					.wrap("<div>")
-					.parent()
-					.css({ 'transition-property': 'transform' });
 				return function (scope, element) {
 					var strip = element.children();
 					var width = element.prop('offsetWidth');
-					children.css('width', width + 'px');
 					var x = 0;
 					$ionicGesture.on('drag', function ($event) {
 						var x1 = x + $event.gesture.deltaX;
@@ -33,7 +28,8 @@
 					}, strip);
 					scope.$watch('ngModel', function (value) {
 						if (!value) return;
-						element.children().css('width', width * value.length + 'px');
+						strip.css('width', width * value.length + 'px');
+						strip.children().css('width', width + 'px');
 					});
 					scope.carouselController = {
 						slide: function (index) {
