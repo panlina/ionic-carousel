@@ -9,7 +9,7 @@
 				carouselController: '='
 			},
 			template: function (element) {
-				return "<div class=carousel-strip style=transition-property:transform;><div ng-repeat=\"$item in ngModel\">" + element.html() + "</div></div>";
+				return "<div class=carousel-strip style=transition-property:transform;><div ng-repeat=\"$item in ngModel\">" + element.html() + "</div></div><div class=carousel-progressbar><div ng-repeat=\"_ in ngModel\" ng-class={active:carouselIndex==$index}></div></div>";
 			},
 			compile: function (element, attr) {
 				return function (scope, element) {
@@ -27,6 +27,7 @@
 						var index = nearest(x + $event.gesture.deltaX);
 						x = width * index;
 						scope.carouselIndex = -index;
+						scope.$apply();
 						translate(x, .4);
 						scope.carouselOnDragEnd({ x: x });
 					}, strip);
