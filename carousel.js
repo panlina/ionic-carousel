@@ -1,5 +1,5 @@
 ﻿angular.module('carousel', ['ionic'])
-	.directive('carousel', function ($ionicGesture) {
+	.directive('carousel', function ($ionicGesture, $compile) {
 		return {
 			scope: {
 				ngModel: '=',
@@ -9,12 +9,29 @@
 				carouselController: '='
 			},
 			template: function (element) {
-				return "<div class=carousel-strip style=transition-property:transform;><div ng-repeat=\"$item in ngModel\">" + element.html() + "</div></div><div class=carousel-progressbar><div ng-repeat=\"_ in ngModel\" ng-class={active:carouselIndex==$index}></div></div>";
+				return "<div class=carousel-strip style=transition-property:transform;></div><div class=carousel-progressbar><div ng-repeat=\"_ in ngModel\" ng-class={active:carouselIndex==$index}></div></div>";
 			},
+			transclude: true,
 			compile: function (element, attr) {
-				return function (scope, element) {
+				return function (scope, element, attr, ctrl, transclude) {
 					var strip = angular.element(element[0].querySelector(".carousel-strip"));
 					var width = element.prop('offsetWidth');
+					scope.$watch('ngModel', function (value) {
+						strip.empty();
+						for (var i in value) {
+							var s = scope.$parent.$new();
+							s.$item = value[i];
+							s.$index = i;
+							var child = strip.children().eq(i);
+							transclude(s, function (clone, scope) {
+								strip.append(
+									angular.element("<div>").append(
+										$compile(clone)(scope)
+									)
+								);
+							});
+						}
+					});
 					var x = 0;
 					scope.carouselIndex = 0;
 					$ionicGesture.on('drag', function ($event) {
