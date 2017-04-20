@@ -41,7 +41,7 @@
 						scope.carouselOnDrag({ x: x1 });
 					}, strip);
 					$ionicGesture.on('dragend', function ($event) {
-						var index = nearest(x + $event.gesture.deltaX);
+						var index = nearest(x, $event.gesture);
 						x = width * index;
 						scope.carouselIndex = -index;
 						scope.$apply();
@@ -64,12 +64,17 @@
 						strip.css({ 'transition-duration': (duration || 0) + 's' });
 						strip.css({ transform: "translate3d(" + x + "px,0,0)" });
 					}
-					function nearest(x) {
+					function nearest(x, gesture) {
+						var x = x + gesture.deltaX;
 						var n = scope.ngModel.length;
 						x /= width;
 						if (x > 0) return 0;
 						if (x < -(n - 1)) return -(n - 1);
 						var f = Math.floor(x);
+						if (gesture.velocityX >= .2) {
+							if (gesture.direction == 'left') return f;
+							if (gesture.direction == 'right') return f + 1;
+						}
 						return x < f + .5 ? f : (f + 1);
 					}
 					function resist(x) {
