@@ -19,7 +19,8 @@
 	</div>
 	<div>x:{{x}}</div>
 	<div>i:{{i}}</div>
-	<button ng-click=c.slide(1);>slide</button>
+	<button ng-click=c.previous();>previous</button>
+	<button ng-click=c.next();>next</button>
 	<script>
 		angular.module('.', ['carousel'])
 			.controller('.', function ($scope) {

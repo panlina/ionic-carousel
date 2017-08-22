@@ -58,6 +58,22 @@
 							x = -width * index;
 							scope.carouselIndex = index;
 							translate(x, .4);
+						},
+						next: function () {
+							this.slide(
+								Math.min(
+									scope.carouselIndex + 1,
+									scope.ngModel.length - 1
+								)
+							);
+						},
+						previous: function () {
+							this.slide(
+								Math.max(
+									scope.carouselIndex - 1,
+									0
+								)
+							);
 						}
 					};
 					function translate(x, duration) {
