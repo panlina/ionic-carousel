@@ -74,11 +74,25 @@
 									0
 								)
 							);
+						},
+						remove: function (index) {
+							scope.ngModel.splice(index, 1);
+							if (scope.carouselIndex >= scope.ngModel.length)
+								scope.carouselIndex = scope.ngModel.length - 1;
+							scope.$$removeIndex = index;
 						}
 					};
+					scope.$watch(function () {
+						if (scope.$$removeIndex == undefined) return;
+						angular.element(element[0].querySelector(".carousel-strip")).children().eq(scope.$$removeIndex).remove();
+						if (scope.$$x < -width * scope.carouselIndex)
+							translate(-width * scope.carouselIndex, 0);
+						scope.$$removeIndex = undefined;
+					});
 					function translate(x, duration) {
 						strip.css({ 'transition-duration': (duration || 0) + 's' });
 						strip.css({ transform: "translate3d(" + x + "px,0,0)" });
+						scope.$$x = x;
 					}
 					function nearest(x, gesture) {
 						var x = x + gesture.deltaX;

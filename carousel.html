@@ -21,6 +21,7 @@
 	<div>i:{{i}}</div>
 	<button ng-click=c.previous();>previous</button>
 	<button ng-click=c.next();>next</button>
+	<button ng-click=c.remove(i);>remove</button>
 	<script>
 		angular.module('.', ['carousel'])
 			.controller('.', function ($scope) {
